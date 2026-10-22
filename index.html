@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAMUF · Recolhimento de Amostras</title>
+<style>
+  :root {
+    /* Altura da barra do Google Apps Script que será escondida */
+    --barra-google: 14px;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #F4F6F7;
+  }
+  .moldura {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+  }
+  .moldura iframe {
+    position: absolute;
+    left: 0;
+    top: calc(-1 * var(--barra-google));
+    width: 100%;
+    height: calc(100% + var(--barra-google));
+    border: 0;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="moldura">
+  <iframe id="app" title="LAMUF · Recolhimento de Amostras"></iframe>
+</div>
+<script>
+  (function () {
+    var URL_APP = 'https://script.google.com/a/macros/floripa.sc.gov.br/s/AKfycbzgcRCMiDyJjf0-dQL9G-A0jzvBl1oWEQE5Yzo5w19mm9CsbSKrWdiRQTXVKqmUGtPj6A/exec';
+
+    // Repassa ?modo=unidade ou ?modo=motorista desta página para o app
+    var modo = new URLSearchParams(window.location.search).get('modo');
+    var src = URL_APP;
+    if (modo === 'unidade' || modo === 'motorista') src += '?modo=' + modo;
+
+    document.getElementById('app').src = src;
+  })();
+</script>
+</body>
+</html>
